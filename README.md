@@ -54,4 +54,46 @@ new_book = Books(id=1, title='Harry Potter', author='J.K.Rowling', rating=9.3)
 db.session.add(new_book)
 db.session.commit()
 ```
+# SQLAlchemy [CRUD]
+## Create:
+### refer to  above section
+## Read:
+### 1. Read All Recode
+e.g.
+```python
+all_books = session.query(Book).all()
+```
+### 2. Read A Particular Record By Query
+e.g.
+```python
+book = session.query.filter_by(title='Harry Potter').first()
+```
+#### one() / one_or_none() / first()?
 
+| result | one() | one_or_none() | first() |
+| --- | --- | --- | --- |
+| 0 | Error: NoResultFound | None | None |
+| 1 | return 1 object | return 1 object| return 1 object|
+| 2 and over | Error: NoResultFound | Error: NoResultFound | return first object |
+## Update:
+### 1. Update A Particular Record By Query
+```python
+book_to_update = Book.query.filter_by(title="Harry Potter").first()
+book_to_update.title = "Harry Potter and the Chamber of Secrets"
+db.session.commit()  
+```
+### 2. Update A Record By PRIMARY KEY
+```python
+book_id = 1
+book_to_update = Book.query.get(book_id)
+book_to_update.title = "Harry Potter and the Goblet of Fire"
+db.session.commit()  
+```
+## Delete A Particular Record By PRIMARY KEY
+```python
+book_id = 1
+book_to_delete = Book.query.get(book_id)
+db.session.delete(book_to_delete)
+db.session.commit()
+```
+You can also delete by querying for a particular value e.g. by title or one of the other properties.
