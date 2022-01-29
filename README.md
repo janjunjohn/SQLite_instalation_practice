@@ -36,7 +36,7 @@ db = SQLAlchemy(app)   # Start using SQLAlchemy
 
 
 # CREATE TABLE MODEL
-class Books(db.Model):
+class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(250), unique=True, nullable=False)
     author = db.Column(db.String(250), nullable=False)
@@ -50,7 +50,7 @@ class Books(db.Model):
 db.create_all()  # CREATE DB
 
 # CREATE RECORD
-new_book = Books(id=1, title='Harry Potter', author='J.K.Rowling', rating=9.3)
+new_book = Book(id=1, title='Harry Potter', author='J.K.Rowling', rating=9.3)  # primary_key is *optional*. the 'id' field will be auto-generated.
 db.session.add(new_book)
 db.session.commit()
 ```
@@ -61,12 +61,12 @@ db.session.commit()
 ### 1. Read All Recode
 e.g.
 ```python
-all_books = session.query(Book).all()
+all_books = db.session.query(Book).all()
 ```
 ### 2. Read A Particular Record By Query
 e.g.
 ```python
-book = session.query.filter_by(title='Harry Potter').first()
+book = db.session.query.filter_by(title='Harry Potter').first()
 ```
 #### one() / one_or_none() / first()?
 
