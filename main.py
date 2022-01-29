@@ -68,8 +68,8 @@ def edit():
 def delete():
     # DELETE A RECORD BY ID
     book_id = request.args.get('id')
-    book_to_edit = Book.query.get(book_id)
-    db.session.delete(book_to_edit)
+    book_to_delete = Book.query.get(book_id)
+    db.session.delete(book_to_delete)
     db.session.commit()
     return redirect(url_for('home'))
 
