@@ -89,7 +89,8 @@ book_to_update = Book.query.get(book_id)
 book_to_update.title = "Harry Potter and the Goblet of Fire"
 db.session.commit()  
 ```
-## Delete A Particular Record By PRIMARY KEY
+## Delete:
+### 1. Delete A Particular Record By PRIMARY KEY
 ```python
 book_id = 1
 book_to_delete = Book.query.get(book_id)
@@ -97,3 +98,8 @@ db.session.delete(book_to_delete)
 db.session.commit()
 ```
 You can also delete by querying for a particular value e.g. by title or one of the other properties.
+### 2. Delete A Table
+e.g.
+```python
+User.__table__.drop(db.engine)
+```
